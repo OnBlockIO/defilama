@@ -1,6 +1,7 @@
+from enum import Enum
 from fastapi import APIRouter, HTTPException
 
-from helpers.external_api import get_gm_price, get_monthly_volume
+from helpers.external_api import get_gm_price, get_monthly_volume, get_gm_stats
 from helpers.blockchain import get_gm_in_gfund, get_gm_minted_per_sec
 
 
@@ -25,6 +26,15 @@ BASE_DATA = {
 }
 
 
+class Chain(str, Enum):
+    avalanche = "avalanche"
+    eth = "eth"
+    polygon = "polygon"
+    bsc = "bsc"
+    pha = "pha"
+    n3 = "n3"
+
+
 @router.get('/yield')
 def get_yield():
     gm_price = get_gm_price()
@@ -41,3 +51,9 @@ def get_yield():
     BASE_DATA['apyReward'] = mint_apr
 
     return BASE_DATA
+
+
+@router.get('/fees')
+def get_fees(chain: Chain, timestamp: int):
+    gm_stats = get_gm_stats(chain, timestamp)
+    return gm_stats

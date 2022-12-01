@@ -32,5 +32,7 @@ def get_gm_stats(chain, start_timestamp):
         "dailyFees": res_day['chains'][0]['forPeriod']['fees'],
         "userFees": res_total['chains'][0]['forPeriod']['fees'],
         "dailyRevenue": res_day['chains'][0]['forPeriod']['fees'],
-        "protocolRevenue": res_total['chains'][0]['forPeriod']['fees']
+        "protocolRevenue": res_total['chains'][0]['forPeriod']['fees'],
+        "dailyVolume": res_day['chains'][0]['forPeriod']['volume'],
+        "totalVolume": res_total['chains'][0]['forPeriod']['volume'],
     }

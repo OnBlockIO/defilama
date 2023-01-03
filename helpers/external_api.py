@@ -37,6 +37,6 @@ def get_gm_stats(chain, start_timestamp):
     }
 
 def get_gas_price(chain):
-    GAS_API_KEY = os.environ.get('OWL')
+    GAS_API_KEY = os.environ['OWL']
     res = requests.get(f"{GAS_PRICES_URL}/{chain}/gas?apikey={GAS_API_KEY}", verify=False).json()
     return res

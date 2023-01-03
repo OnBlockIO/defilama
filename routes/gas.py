@@ -16,7 +16,7 @@ class Chain(str, Enum):
     all = "all"
 
 @router.get('/{chain}')
-def get_gas_prices(chain: Chain | None):
+def get_gas_prices(chain: Chain):
     gas_price = get_gas_price(chain)
     if chain != Chain.all:
         return [gas_price]

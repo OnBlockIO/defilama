@@ -1,6 +1,5 @@
 import requests
 
-
 def get_gm_minted_per_sec(server="http://seed1.neo.org:10332"):
     payload = {
         "jsonrpc": "2.0",

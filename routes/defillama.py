@@ -4,12 +4,10 @@ from fastapi import APIRouter, HTTPException
 from helpers.external_api import get_gm_price, get_monthly_volume, get_gm_stats
 from helpers.blockchain import get_gm_in_gfund, get_gm_minted_per_sec
 
-
 router = APIRouter(
     prefix='/defillama',
     tags=['DefiLlama'],
 )
-
 
 BASE_DATA = {
     "pool": "0xb91888ba149f267ad91817822bf2adaa0e3aa697",
@@ -25,7 +23,6 @@ BASE_DATA = {
     "poolMeta": "GhostMarket Single Stake Pool"
 }
 
-
 class Chain(str, Enum):
     avalanche = "avalanche"
     eth = "eth"
@@ -33,7 +30,6 @@ class Chain(str, Enum):
     bsc = "bsc"
     pha = "pha"
     n3 = "n3"
-
 
 @router.get('/yield')
 def get_yield():
@@ -51,7 +47,6 @@ def get_yield():
     BASE_DATA['apyReward'] = mint_apr
 
     return BASE_DATA
-
 
 @router.get('/fees')
 def get_fees(chain: Chain, timestamp: int):

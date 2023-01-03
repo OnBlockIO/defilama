@@ -4,17 +4,14 @@ from fastapi import APIRouter, HTTPException
 from helpers.external_api import get_gm_price
 from helpers.blockchain import get_gm_in_gfund, get_gfund_supply
 
-
 router = APIRouter(
     prefix='/prices',
     tags=['Prices'],
 )
 
-
 class Token(str, Enum):
     gm = "gm"
     gfund = "gfund"
-
 
 @router.get('/{token}')
 def get_price(token: Token):

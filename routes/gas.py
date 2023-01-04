@@ -22,10 +22,18 @@ def get_gas_prices(chain: Chain):
         return [gas_price]
     elif chain == Chain.all:
         arr = []
-        arr.append(get_gas_price('avalanche'))
-        arr.append(get_gas_price('eth'))
-        arr.append(get_gas_price('polygon'))
-        arr.append(get_gas_price('bsc'))
+        gasAvalanche = get_gas_price('avalanche')
+        gasAvalanche['chain'] = 'avalanche'
+        arr.append(gasAvalanche)
+        gasEth = get_gas_price('eth')
+        gasEth['chain'] = 'eth'
+        arr.append(gasEth)
+        gasPolygon = get_gas_price('polygon')
+        gasPolygon['chain'] = 'polygon'
+        arr.append(gasPolygon)
+        gasBsc = get_gas_price('bsc')
+        gasBsc['chain'] = 'bsc'
+        arr.append(gasBsc)
         return arr
     else:
         raise HTTPException(status_code=403, detail="Chain not available")

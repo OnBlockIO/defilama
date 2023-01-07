@@ -3,7 +3,6 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from routes.prices import router as price_router
 from routes.defillama import router as defillama_router
-from routes.gas import router as gas_router
 
 app = FastAPI(
     version="0.0.1",
@@ -20,4 +19,3 @@ app.add_middleware(
 
 app.include_router(price_router)
 app.include_router(defillama_router)
-app.include_router(gas_router)

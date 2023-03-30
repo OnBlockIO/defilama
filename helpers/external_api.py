@@ -14,14 +14,16 @@ MAPPING = {
     "n3": "neo"
 }
 
+
 def get_gm_price():
-    print(requests.get(GM_PRICE_URL, verify=False).status_code)
-    res = requests.get(GM_PRICE_URL, verify=False).json()
+    res = requests.get(GM_PRICE_URL, verify=False, headers={'User-Agent': 'GhostMarket Bot'}).json()
     return res['ghostmarket']['usd']
+
 
 def get_monthly_volume():
     res = requests.get(GM_FEES_URL, verify=False).json()
     return res['chains'][0]['monthly']['volume']
+
 
 def get_gm_stats(chain, start_timestamp):
     end_timestamp = start_timestamp + 3600 * 24

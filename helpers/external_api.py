@@ -20,7 +20,7 @@ def get_gm_price():
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
         "X-Requested-With": "XMLHttpRequest"
     }
-    res = requests.get(GM_PRICE_URL, verify=False, headers=headers).json()
+    res = requests.get(GM_PRICE_URL, headers=headers).json()
     return res['ghostmarket']['usd']
 
 

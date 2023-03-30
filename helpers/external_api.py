@@ -15,6 +15,7 @@ MAPPING = {
 }
 
 def get_gm_price():
+    print(requests.get(GM_PRICE_URL, verify=False).text)
     res = requests.get(GM_PRICE_URL, verify=False).json()
     return res['ghostmarket']['usd']
 

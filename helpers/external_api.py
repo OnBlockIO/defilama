@@ -1,7 +1,9 @@
 import requests
-import os
+import warnings
 
-GM_PRICE_URL = "https://api.coingecko.com/api/v3/simple/price?ids=ghostmarket&vs_currencies=usd"
+warnings.filterwarnings("ignore", message="Unverified HTTPS request")
+
+GM_PRICE_URL = "https://api.flamingo.finance/token-info/prices"
 GM_FEES_URL = "https://api.ghostmarket.io/api/v2/stats/chains?orderBy=MonthlyVolume&orderDirection=asc&page=1&size=50&getTotal=true&getWeeklyStats=true&getMonthlyStats=true&getTotalStats=false&localCurrency=USD&chain=n3"
 GM_STATS_URL = "https://api.ghostmarket.io/api/v2/stats/forperiod/chains"
 
@@ -16,12 +18,10 @@ MAPPING = {
 
 
 def get_gm_price():
-    headers = {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.75 Safari/537.36",
-        "X-Requested-With": "XMLHttpRequest"
-    }
-    res = requests.get(GM_PRICE_URL, headers=headers).json()
-    return res['ghostmarket']['usd']
+    res = requests.get(GM_PRICE_URL, verify=False).json()
+    for token_info in res:
+        if token_info["symbol"] == "GM":
+            return token_info['usd_price']
 
 
 def get_monthly_volume():

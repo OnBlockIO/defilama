@@ -13,7 +13,8 @@ MAPPING = {
     "polygon": "polygon",
     "bsc": "bsc",
     "pha": "phantasma",
-    "n3": "neo"
+    "n3": "neo",
+    "base": "base"
 }
 
 

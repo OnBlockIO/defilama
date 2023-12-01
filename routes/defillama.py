@@ -30,6 +30,7 @@ class Chain(str, Enum):
     bsc = "bsc"
     pha = "pha"
     n3 = "n3"
+    base = "base"
 
 @router.get('/yield')
 def get_yield():

@@ -31,14 +31,25 @@ def get_monthly_volume():
 
 
 def get_gm_stats(chain, start_timestamp):
+    start_timestamp = start_timestamp - (start_timestamp % 86400)
     end_timestamp = start_timestamp + 3600 * 24
     res_day = requests.get(f"{GM_STATS_URL}?chain={chain}&startTimestamp={start_timestamp}&endTimestamp={end_timestamp}", verify=False).json()
     res_total = requests.get(f"{GM_STATS_URL}?chain={chain}", verify=False).json()
-    return {
-        "dailyFees": res_day['chains'][0]['forPeriod']['fees'],
-        "userFees": res_total['chains'][0]['forPeriod']['fees'],
-        "dailyRevenue": res_day['chains'][0]['forPeriod']['fees'],
-        "protocolRevenue": res_total['chains'][0]['forPeriod']['fees'],
-        "dailyVolume": res_day['chains'][0]['forPeriod']['volume'],
-        "totalVolume": res_total['chains'][0]['forPeriod']['volume'],
-    }
+    if res_day['chains'] is None:
+        return {
+            "dailyFees": 0.0,
+            "userFees": 0.0,
+            "dailyRevenue": 0.0,
+            "protocolRevenue": 0.0,
+            "dailyVolume": 0.0,
+            "totalVolume": 0.0,
+        }
+    else:
+        return {
+            "dailyFees": res_day['chains'][0]['forPeriod']['fees'],
+            "userFees": res_total['chains'][0]['forPeriod']['fees'],
+            "dailyRevenue": res_day['chains'][0]['forPeriod']['fees'],
+            "protocolRevenue": res_total['chains'][0]['forPeriod']['fees'],
+            "dailyVolume": res_day['chains'][0]['forPeriod']['volume'],
+            "totalVolume": res_total['chains'][0]['forPeriod']['volume'],
+        }
